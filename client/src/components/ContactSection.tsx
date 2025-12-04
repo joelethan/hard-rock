@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { apiRequest } from "@/lib/queryClient";
+import { Mail, Phone, MapPin, Clock, Send, Loader2 } from "lucide-react";
 
 export default function ContactSection() {
   const { toast } = useToast();
@@ -14,7 +16,27 @@ export default function ContactSection() {
     phone: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const contactMutation = useMutation({
+    mutationFn: async (data: typeof formData) => {
+      const response = await apiRequest("POST", "/api/contact", data);
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Message Sent!",
+        description: data.message || "Thank you for contacting us. We'll get back to you soon.",
+      });
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,18 +44,7 @@ export default function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // todo: remove mock functionality - implement actual form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you soon.",
-    });
-    
-    setFormData({ name: "", email: "", phone: "", message: "" });
-    setIsSubmitting(false);
+    contactMutation.mutate(formData);
   };
 
   return (
@@ -66,6 +77,7 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    disabled={contactMutation.isPending}
                     data-testid="input-contact-name"
                   />
                 </div>
@@ -81,6 +93,7 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    disabled={contactMutation.isPending}
                     data-testid="input-contact-email"
                   />
                 </div>
@@ -97,6 +110,7 @@ export default function ContactSection() {
                   placeholder="+256 700 000 000"
                   value={formData.phone}
                   onChange={handleChange}
+                  disabled={contactMutation.isPending}
                   data-testid="input-contact-phone"
                 />
               </div>
@@ -113,6 +127,7 @@ export default function ContactSection() {
                   value={formData.message}
                   onChange={handleChange}
                   required
+                  disabled={contactMutation.isPending}
                   data-testid="input-contact-message"
                 />
               </div>
@@ -120,11 +135,20 @@ export default function ContactSection() {
               <Button 
                 type="submit" 
                 className="w-full sm:w-auto gap-2" 
-                disabled={isSubmitting}
+                disabled={contactMutation.isPending}
                 data-testid="button-submit-contact"
               >
-                <Send className="w-4 h-4" />
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {contactMutation.isPending ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    Send Message
+                  </>
+                )}
               </Button>
             </form>
           </div>
