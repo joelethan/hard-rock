@@ -20,7 +20,7 @@ A professional showcase website for Hard Rock Farming and Development Associatio
 - Responsive mobile-first design
 
 ## Contact Information
-- Phone: +048 / 0705 372 001
+- Phone: +256 / 0776 630 948
 - Email: richardroyals98@gmail.com
 - Location: East Africa Region (Uganda, Kenya, Tanzania)
 

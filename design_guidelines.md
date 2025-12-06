@@ -52,7 +52,7 @@
 
 6. **Contact & Location CTA**
    - Split layout: contact form (left) + farm details/map placeholder (right)
-   - Phone: +048 / 0705 372 001
+   - Phone: +256 / 0776 630 948
    - Email: richardroyals98@gmail.com
 
 ### Service Pages

@@ -98,7 +98,7 @@ export default function ContactSection() {
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
                   Phone Number (Optional)
@@ -114,7 +114,7 @@ export default function ContactSection() {
                   data-testid="input-contact-phone"
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                   Your Message
@@ -131,7 +131,7 @@ export default function ContactSection() {
                   data-testid="input-contact-message"
                 />
               </div>
-              
+
               <Button 
                 type="submit" 
                 className="w-full sm:w-auto gap-2" 
@@ -159,7 +159,7 @@ export default function ContactSection() {
                 <h3 className="font-heading font-semibold text-lg text-foreground mb-6">
                   Farm Information
                 </h3>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
@@ -167,10 +167,10 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <p className="font-medium text-foreground">Phone</p>
-                      <p className="text-muted-foreground">+048 / 0705 372 001</p>
+                      <p className="text-muted-foreground">+256 / 0776 630 948</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <Mail className="w-5 h-5 text-primary" />
@@ -180,7 +180,7 @@ export default function ContactSection() {
                       <p className="text-muted-foreground">richardroyals98@gmail.com</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <MapPin className="w-5 h-5 text-primary" />
@@ -190,7 +190,7 @@ export default function ContactSection() {
                       <p className="text-muted-foreground">East Africa Region<br />Uganda - Kenya - Tanzania</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <Clock className="w-5 h-5 text-primary" />
