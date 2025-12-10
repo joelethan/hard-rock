@@ -42,7 +42,7 @@ export default function Gallery() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-card">
+    <section id="gallery" className="py-16 md:py-24 bg-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <p className="text-primary font-heading font-semibold text-sm uppercase tracking-wider mb-2">
