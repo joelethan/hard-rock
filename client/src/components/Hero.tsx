@@ -1,9 +1,11 @@
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, MapPin, Leaf } from "lucide-react";
-import heroImage from "@assets/stock_images/beautiful_green_agri_b334b90f.jpg";
-import logoImage from "@assets/image_1764876717686.png";
+import { heroImage, logoImage } from "@/lib/images";
 
 export default function Hero() {
+  const [, setLocation] = useLocation();
+  
   const scrollToServices = () => {
     document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -50,6 +52,7 @@ export default function Hero() {
             size="lg" 
             className="gap-2 text-base px-8 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20"
             data-testid="button-plan-visit"
+            onClick={() => setLocation("/plan-your-visit")}
           >
             <MapPin className="w-5 h-5" />
             Plan Your Visit
@@ -68,7 +71,7 @@ export default function Hero() {
 
       <button
         onClick={scrollToServices}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 hover:text-white transition-colors animate-bounce"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 hover:text-white transition-colors animate-bounce focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-full"
         data-testid="button-scroll-down"
         aria-label="Scroll to services"
       >

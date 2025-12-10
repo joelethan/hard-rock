@@ -6,8 +6,11 @@ import FeaturedPrograms from "@/components/FeaturedPrograms";
 import Gallery from "@/components/Gallery";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import { useScrollToTarget } from "@/lib/scroll-context";
 
 export default function Home() {
+  useScrollToTarget();
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
