@@ -1,5 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { useLocation } from "wouter";
 import { ArrowRight, type LucideIcon } from "lucide-react";
 
 interface ServiceCardProps {
@@ -7,13 +6,20 @@ interface ServiceCardProps {
   description: string;
   image: string;
   icon: LucideIcon;
-  href?: string;
+  slug: string;
 }
 
-export default function ServiceCard({ title, description, image, icon: Icon, href = "#" }: ServiceCardProps) {
+export default function ServiceCard({ title, description, image, icon: Icon, slug }: ServiceCardProps) {
+  const [, setLocation] = useLocation();
+
   return (
-    <Card className="group overflow-visible hover-elevate cursor-pointer">
-      <div className="relative h-48 overflow-hidden rounded-t-lg">
+    <button
+      type="button"
+      onClick={() => setLocation(`/services/${slug}`)}
+      className="text-left w-full h-full rounded-lg overflow-hidden bg-card border border-border shadow-sm hover:shadow-md transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 group"
+      data-testid={`card-service-${slug}`}
+    >
+      <div className="relative h-48 overflow-hidden">
         <img 
           src={image} 
           alt={title}
@@ -24,22 +30,18 @@ export default function ServiceCard({ title, description, image, icon: Icon, hre
           <Icon className="w-6 h-6 text-primary-foreground" />
         </div>
       </div>
-      <CardContent className="p-6">
+      <div className="p-6">
         <h3 className="font-heading font-semibold text-xl mb-2 text-foreground">
           {title}
         </h3>
         <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
           {description}
         </p>
-        <Button 
-          variant="ghost" 
-          className="gap-2 p-0 h-auto font-medium text-primary hover:text-primary/80"
-          data-testid={`button-learn-more-${title.toLowerCase().replace(/\s+/g, '-')}`}
-        >
+        <span className="inline-flex items-center gap-2 font-medium text-primary group-hover:text-primary/80">
           Learn More
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-        </Button>
-      </CardContent>
-    </Card>
+        </span>
+      </div>
+    </button>
   );
 }

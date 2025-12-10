@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { X, ChevronLeft, ChevronRight, Images } from "lucide-react";
@@ -25,6 +26,7 @@ const galleryImages = [
 
 export default function Gallery() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [, setLocation] = useLocation();
 
   const openLightbox = (index: number) => setSelectedIndex(index);
   const closeLightbox = () => setSelectedIndex(null);
@@ -77,7 +79,12 @@ export default function Gallery() {
         </div>
 
         <div className="text-center mt-8">
-          <Button variant="outline" className="gap-2" data-testid="button-view-all-gallery">
+          <Button 
+            variant="outline" 
+            className="gap-2" 
+            onClick={() => setLocation("/gallery")}
+            data-testid="button-view-all-gallery"
+          >
             <Images className="w-4 h-4" />
             View Full Gallery
           </Button>
